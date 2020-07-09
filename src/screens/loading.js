@@ -1,22 +1,14 @@
 import React from 'react';
-import {View, StatusBar, ActivityIndicator, StyleSheet, Text} from 'react-native';
+import { StatusBar, ActivityIndicator, Text} from 'react-native';
+import { View } from '../components/loading/styledView';
 
 const Loading = () => {
   return (
-    <View style={styles.container}>
+    <View>
       <StatusBar backgroundColor={'#FF5722'} />
       <ActivityIndicator size="large" color="#fff" />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#FF5722',
-    justifyContent: 'center',
-  },
-});
 
 export default Loading;
