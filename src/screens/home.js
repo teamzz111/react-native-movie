@@ -1,26 +1,11 @@
 import React from 'react';
 import { useDispatch } from "react-redux";
-import theme from 'styled-theming';
 import styled from 'styled-components/native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import ToggleSwitch from 'toggle-switch-react-native'
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import { useSelector } from "react-redux";
+import { backgroundColor, contrastColor, textColor } from '../utils/color';
 
-export const backgroundColor = theme('theme', {
-  light: '#fff',
-  dark: '#202124',
-});
-
-export const contrastColor = theme('theme', {
-  light: '#5ca1d4',
-  dark: '#313235'
-});
-
-export const textColor = theme('theme', {
-  light: '#000',
-  dark: '#fff',
-});
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -49,11 +34,14 @@ const HomeScreen = () => {
             <Text>¡Bienvenido!</Text>
           </Header>
         )}>
+
+
         <Content>
           <Child>
-            <Text>Scroll me</Text>
+            <Title>LO MÁS POPULAR DEL MOMENTO</Title>
           </Child>
         </Content>
+
       </ParallaxScrollView>
     </Container>
   );
@@ -65,6 +53,12 @@ const Dark = styled.View`
   marginLeft: 220px;
 `
 
+const Title = styled.Text`
+  fontSize: 13px;
+  color: ${textColor};
+  fontWeight: 300;
+  opacity: .7;
+`;
 
 const Header = styled.View`
   backgroundColor: ${contrastColor};
@@ -81,7 +75,8 @@ const Child = styled.View`
   borderTopLeftRadius: 30px;
   borderTopRightRadius: 30px;
   height: 200%;
-  padding: 20px;
+  padding: 30px;
+  marginTop: 10px;
   backgroundColor: ${backgroundColor};
   color: ${textColor};
 `;
