@@ -1,4 +1,4 @@
-import { baseURL, imageURL, token } from '../constants/functionsURLs';
+import { baseURL, imageURL, token } from '../constants/url';
 
 const axios = require('axios');
 
@@ -39,7 +39,7 @@ export const fetchData = {
 const createOkResponse = response => {
   return {
     ok: response.status === 200,
-    data: response.data.results,
+    data: response.data,
   };
 };
 

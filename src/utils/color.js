@@ -1,16 +1,16 @@
-export const themes = {
-  light: {
-    primaryColor: "#FFA72A",
-    accentColor: "#458622",
-    backgroundColor: "#FFC777",
-    textColor: "#504f4d",
-    secondaryColor: "#7F5315",
-  },
-  dark: {
-    primaryColor: "#1B8C81",
-    accentColor: "#458622",
-    backgroundColor: "#8FC266",
-    textColor: "#D94B2B",
-    secondaryColor: "#B9667F",
-  }
-};
+import theme from 'styled-theming';
+
+export const backgroundColor = theme('theme', {
+  light: '#fff',
+  dark: '#202124',
+});
+
+export const contrastColor = theme('theme', {
+  light: '#5ca1d4',
+  dark: '#313235'
+});
+
+export const textColor = theme('theme', {
+  light: '#000',
+  dark: '#fff',
+});
