@@ -9,7 +9,7 @@ const DarkThemeProvider = ({ children }) => {
   
   return (
     <ThemeProvider theme={{ theme: darkThemeEnabled ? "dark" : "light" }}>
-      <StatusBar backgroundColor = {darkThemeEnabled ? 'black' : 'white'} barStyle = {darkThemeEnabled ? 'light-content' : 'dark-content'} />
+      <StatusBar backgroundColor = {'transparent'} translucent = {true} />
       {children}
     </ThemeProvider>
   );
