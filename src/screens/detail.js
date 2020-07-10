@@ -4,20 +4,34 @@ import styled from 'styled-components/native';
 import { fetchData } from '../utils/fetchData';
 import { imageURL, movieDetail } from '../constants/url';
 import {Rating, AirbnbRating} from 'react-native-ratings';
-import { Linking } from 'react-native';
+import { Linking, BackHandler } from 'react-native';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
-const Detail = ({route}) => {
+const Detail = ({navigation}) => {
   const [movies, setMovies] = useState([]);
+  const id = navigation.getParam("id");
 
     useEffect(() => {
+
       data();
+
+      const backAction = () => {
+        navigation.goBack(null);
+        return true;
+      };
+
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction
+      );
+
+      return () => backHandler.remove();
     }, []);
 
   
 
   const data = async () => {
-    const request = await fetchData.Get(movieDetail.detail + "696374?language=en-US");
+    const request = await fetchData.Get(movieDetail.detail + id + "?language=en-US");
 
     if (request.ok) {
       setMovies(request.data);
