@@ -19,6 +19,8 @@ const HomeScreen = ({navigation}) => {
 
   useEffect(() => {
     data();
+    data2();
+
   }, []);
 
   const navigate = (id) => {
@@ -27,9 +29,19 @@ const HomeScreen = ({navigation}) => {
 
   const data = async() => {
     const request = await fetchData.Get(moviesList.list + "?language=en-US&page=" + page);
-
+    
     if(request.ok){
-      setMovies(request.results.data);
+      setMovies(request.data.results);
+    } else {
+      console.warn(request);
+    }
+
+  }
+  const data2 = async () => {
+    const request = await fetchData.Get(moviesList.rated + "?language=en-US&page=" + page);
+
+    if (request.ok) {
+      setRated(request.data.results);
     } else {
       console.warn(request);
     }
@@ -69,7 +81,13 @@ const HomeScreen = ({navigation}) => {
               keyExtractor={item => item.id.toString()}
               horizontal = {true}
             />
-
+            <Title>TOP RATED</Title>
+            <FlatList
+              data={rated}
+              renderItem={item => <Card {...item} handler = {navigate}/>}
+              keyExtractor={item => item.id.toString()}
+              horizontal = {true}
+            />
           </Child>
         </Content>
 
