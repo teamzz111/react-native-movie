@@ -37,10 +37,10 @@ const Child = styled.View`
 `
 
 const Container = styled.TouchableHighlight`
-  flex: 1;
   marginRight: 10px;
   marginLeft: 10px;
   marginTop: 20px;
+  minWidth: 130px;
 `
 const Image = styled.Image`
   width: 120px;
