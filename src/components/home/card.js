@@ -4,9 +4,11 @@ import { backgroundColor, contrastColor, textColor } from '../../utils/color';
 import {Rating, AirbnbRating} from 'react-native-ratings';
 import { imageURL, moviesList } from '../../constants/url';
 
-const Card = ({item}) => {
+const Card = ({item, handler}) => {
   return (
-    <Container>
+    <Container
+      onPress = {() => handler(item.id)}
+    >
       <Child>
         <Image
           source={{
