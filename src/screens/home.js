@@ -10,7 +10,7 @@ import { fetchData } from '../utils/fetchData';
 import { moviesList } from '../constants/url';
 import { FlatList } from 'react-native';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const darkThemeEnabled = useSelector((state) => state.preferences.darkThemeEnabled, []);
   const [page, setPage] = useState(1);
@@ -19,24 +19,17 @@ const HomeScreen = () => {
 
   useEffect(() => {
     data();
-    data2();
   }, []);
 
-  const data2 = async() => {
-    const request2 = await fetchData.Get(moviesList.rated + "?language=es-ES&page=" + page);
-    if (request2.ok) {
-      setRated(request2.data);
-    } else {
-      console.warn(request2);
-    }
+  const navigate = (id) => {
+    navigation.navigate("Detail", {id});
   }
 
   const data = async() => {
-    const request = await fetchData.Get(moviesList.list + "?language=es-ES&page=" + page);
-    const request2 = await fetchData.Get(moviesList.rated + "?language=es-ES&page=" + page);
+    const request = await fetchData.Get(moviesList.list + "?language=en-US&page=" + page);
 
     if(request.ok){
-      setMovies(request.data);
+      setMovies(request.results.data);
     } else {
       console.warn(request);
     }
@@ -62,28 +55,21 @@ const HomeScreen = () => {
                 onToggle={isOn => dispatch({type: 'TOGGLE_DARKTHEME'})}
               />
             </Dark>
-            <Text>¡Bienvenido!</Text>
+            <Text>Welcome!</Text>
           </Header>
         )}>
 
 
         <Content>
           <Child>
-            <Title>LO MÁS POPULAR DEL MOMENTO</Title>
+            <Title>MOST POPULAR</Title>
             <FlatList
               data={movies}
-              renderItem={item => <Card {...item}/>}
-              keyExtractor={item => item.id}
+              renderItem={item => <Card {...item} handler = {navigate}/>}
+              keyExtractor={item => item.id.toString()}
               horizontal = {true}
             />
-            <Title>PODRÌA INTERESARTE</Title>
 
-            <FlatList
-              data={rated}
-              renderItem={item => <Card {...item}/>}
-              keyExtractor={item => item.id}
-              horizontal = {true}
-            />
           </Child>
         </Content>
 
@@ -122,6 +108,7 @@ const Child = styled.View`
   borderTopRightRadius: 30px;
   height: 140%;
   padding: 30px;
+  width: 100%;
   marginTop: 10px;
   backgroundColor: ${backgroundColor};
   color: ${textColor};
