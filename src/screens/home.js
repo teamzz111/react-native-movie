@@ -5,7 +5,7 @@ import ToggleSwitch from 'toggle-switch-react-native'
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import { useSelector } from "react-redux";
 import { backgroundColor, contrastColor, textColor } from '../utils/color';
-
+import Card from '../components/home/card';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -39,6 +39,8 @@ const HomeScreen = () => {
         <Content>
           <Child>
             <Title>LO MÁS POPULAR DEL MOMENTO</Title>
+            <Card/>            
+
           </Child>
         </Content>
 
