@@ -27,7 +27,8 @@
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",
     "styled-components": "^5.1.1",
-    "styled-theming": "^2.2.0"
+    "styled-theming": "^2.2.0",
+    "toggle-switch-react-native": "^2.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

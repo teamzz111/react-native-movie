@@ -3,8 +3,9 @@ import { useDispatch } from "react-redux";
 import theme from 'styled-theming';
 import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { View } from 'react-native';
+import ToggleSwitch from 'toggle-switch-react-native'
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
+import { useSelector } from "react-redux";
 
 export const backgroundColor = theme('theme', {
   light: '#fff',
@@ -23,6 +24,8 @@ export const textColor = theme('theme', {
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
+  const darkThemeEnabled = useSelector((state) => state.preferences.darkThemeEnabled, []);
+
 
   return (
     <Container>
@@ -32,9 +35,18 @@ const HomeScreen = () => {
         parallaxHeaderHeight={150}
         renderForeground={() => (
           <Header>
-            <TouchableOpacity onPress={() => dispatch({type: 'TOGGLE_DARKTHEME'})}>
-              <Text>asd</Text>
-            </TouchableOpacity>
+            <Dark>
+              <ToggleSwitch
+                isOn={darkThemeEnabled}
+                onColor="black"
+                offColor="#4d46bf"
+                label="Modo oscuro"
+                labelStyle={{ color: darkThemeEnabled ? "white" : "black", fontWeight: "900" }}
+                size="medium"
+                onToggle={isOn => dispatch({type: 'TOGGLE_DARKTHEME'})}
+              />
+            </Dark>
+            <Text>¡Bienvenido!</Text>
           </Header>
         )}>
         <Content>
@@ -47,6 +59,12 @@ const HomeScreen = () => {
   );
 }
 
+const Dark = styled.View`
+  marginTop: 30px;
+  marginBottom: 10px;
+  marginLeft: 220px;
+`
+
 
 const Header = styled.View`
   backgroundColor: ${contrastColor};
@@ -56,20 +74,22 @@ const Header = styled.View`
 `;
 
 const Content = styled.View`
-  height: 500px
+  height: 500px;
 `;
 
 const Child = styled.View`
   borderTopLeftRadius: 30px;
   borderTopRightRadius: 30px;
-  height: 100%;
-  padding: 30px;
+  height: 200%;
+  padding: 20px;
   backgroundColor: ${backgroundColor};
   color: ${textColor};
 `;
 
 const Text = styled.Text`
   color: ${textColor};
+  fontSize: 30px;
+  marginTop: 10px
 `;
 
 
