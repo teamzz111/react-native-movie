@@ -14,7 +14,7 @@ const Card = ({item}) => {
               imageURL + moviesList.image + item.poster_path,
           }}
         />
-        <Text>{item.title}  </Text>
+        <Text>{item.title}</Text>
         <AirbnbRating
           count={item.vote_average / 2}
           defaultRating={7}

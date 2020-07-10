@@ -15,18 +15,32 @@ const HomeScreen = () => {
   const darkThemeEnabled = useSelector((state) => state.preferences.darkThemeEnabled, []);
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState([]);
+  const [rated, setRated] = useState([]);
 
   useEffect(() => {
     data();
+    data2();
   }, []);
+
+  const data2 = async() => {
+    const request2 = await fetchData.Get(moviesList.rated + "?language=es-ES&page=" + page);
+    if (request2.ok) {
+      setRated(request2.data);
+    } else {
+      console.warn(request2);
+    }
+  }
 
   const data = async() => {
     const request = await fetchData.Get(moviesList.list + "?language=es-ES&page=" + page);
+    const request2 = await fetchData.Get(moviesList.rated + "?language=es-ES&page=" + page);
+
     if(request.ok){
       setMovies(request.data);
     } else {
       console.warn(request);
     }
+
   }
 
   return (
@@ -62,6 +76,14 @@ const HomeScreen = () => {
               keyExtractor={item => item.id}
               horizontal = {true}
             />
+            <Title>PODRÌA INTERESARTE</Title>
+
+            <FlatList
+              data={rated}
+              renderItem={item => <Card {...item}/>}
+              keyExtractor={item => item.id}
+              horizontal = {true}
+            />
           </Child>
         </Content>
 
@@ -80,6 +102,7 @@ const Title = styled.Text`
   fontSize: 13px;
   color: ${textColor};
   fontWeight: 300;
+  margin: 10px;
   opacity: .7;
 `;
 
@@ -97,7 +120,7 @@ const Content = styled.View`
 const Child = styled.View`
   borderTopLeftRadius: 30px;
   borderTopRightRadius: 30px;
-  height: 200%;
+  height: 150%;
   padding: 30px;
   marginTop: 10px;
   backgroundColor: ${backgroundColor};
