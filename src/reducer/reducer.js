@@ -4,16 +4,16 @@ import {
 
 import navigation from './navigation';
 import data from './data';
+import preferences from './config'
 
 const Reducer = combineReducers({
   navigation,
-  data
+  data,
+  preferences
 });
 
 const reducer = (state, action) => {
-  if (action.type === 'DESTROY_SESSION') {
-    state = undefined;
-  }
+  
   return Reducer(state, action);
 }
 

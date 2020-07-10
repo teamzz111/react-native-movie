@@ -13,7 +13,7 @@ export class AppNavigatorWithState extends ReduxContainer {
 // Send props from the state
 function mapStateToProps(state) {
   return {
-    state: state.navigation
+    state: state.navigation,
   }
 }
 
