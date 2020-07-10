@@ -1,5 +1,3 @@
-import * as React from 'react';
-import Loading from '../screens/loading';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import HomeScreen from '../screens/home';
@@ -9,8 +7,9 @@ const AppNavigator = createStackNavigator(
     App: HomeScreen,
   },
   {
-    initialRouteName: 'App', // default - Loading
+    initialRouteName: 'App',
     defaultNavigationOptions: {
+      headerShown: false
     }
   },
 );
