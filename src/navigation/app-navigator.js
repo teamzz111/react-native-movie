@@ -9,7 +9,7 @@ const AppNavigator = createStackNavigator(
     Detail
   },
   {
-    initialRouteName: 'Detail',
+    initialRouteName: 'App',
     defaultNavigationOptions: {
       headerShown: false
     }
