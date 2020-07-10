@@ -1,4 +1,4 @@
-import { baseURL, imageURL, token } from '../constants/functionsURLs';
+import { baseURL, imageURL, token } from '../constants/url';
 
 const axios = require('axios');
 

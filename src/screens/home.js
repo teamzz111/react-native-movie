@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
 import styled from 'styled-components/native';
 import ToggleSwitch from 'toggle-switch-react-native'
@@ -6,11 +6,28 @@ import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import { useSelector } from "react-redux";
 import { backgroundColor, contrastColor, textColor } from '../utils/color';
 import Card from '../components/home/card';
+import { fetchData } from '../utils/fetchData';
+import { moviesList } from '../constants/url';
+import { FlatList } from 'react-native';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const darkThemeEnabled = useSelector((state) => state.preferences.darkThemeEnabled, []);
+  const [page, setPage] = useState(1);
+  const [movies, setMovies] = useState([]);
 
+  useEffect(() => {
+    data();
+  }, []);
+
+  const data = async() => {
+    const request = await fetchData.Get(moviesList.list + "?language=es-ES&page=" + page);
+    if(request.ok){
+      setMovies(request.data);
+    } else {
+      console.warn(request);
+    }
+  }
 
   return (
     <Container>
@@ -39,8 +56,12 @@ const HomeScreen = () => {
         <Content>
           <Child>
             <Title>LO MÁS POPULAR DEL MOMENTO</Title>
-            <Card/>            
-
+            <FlatList
+              data={movies}
+              renderItem={item => <Card {...item}/>}
+              keyExtractor={item => item.id}
+              horizontal = {true}
+            />
           </Child>
         </Content>
 

@@ -2,21 +2,22 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { backgroundColor, contrastColor, textColor } from '../../utils/color';
 import {Rating, AirbnbRating} from 'react-native-ratings';
+import { imageURL, moviesList } from '../../constants/url';
 
-const Card = () => {
+const Card = ({item}) => {
   return (
     <Container>
       <Child>
         <Image
           source={{
             uri:
-              'https://image.tmdb.org/t/p/w200/bTL9PlNlcX8kZZNLym80zpWucU4.jpg',
+              imageURL + moviesList.image + item.poster_path,
           }}
         />
-        <Text>Avengers: End Game  </Text>
+        <Text>{item.title}  </Text>
         <AirbnbRating
-          count={4}
-          defaultRating={5}
+          count={item.vote_average / 2}
+          defaultRating={7}
           size={20}
           isDisabled={true}
           showRating={false}
@@ -35,6 +36,8 @@ const Child = styled.View`
 
 const Container = styled.TouchableHighlight`
   flex: 1;
+  marginRight: 10px;
+  marginLeft: 10px;
   marginTop: 20px;
 `
 const Image = styled.Image`
