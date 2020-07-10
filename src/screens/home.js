@@ -102,8 +102,8 @@ const Title = styled.Text`
   fontSize: 13px;
   color: ${textColor};
   fontWeight: 300;
-  margin: 10px;
   opacity: .7;
+  margin: 10px;
 `;
 
 const Header = styled.View`
@@ -120,7 +120,7 @@ const Content = styled.View`
 const Child = styled.View`
   borderTopLeftRadius: 30px;
   borderTopRightRadius: 30px;
-  height: 150%;
+  height: 140%;
   padding: 30px;
   marginTop: 10px;
   backgroundColor: ${backgroundColor};
